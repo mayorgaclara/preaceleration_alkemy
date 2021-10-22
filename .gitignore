@@ -23,3 +23,10 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
+
+##INTELLIJ IDEA##
+
+.idea
+*.iws
+*.iml
+*.ipr
