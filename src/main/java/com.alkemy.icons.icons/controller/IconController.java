@@ -30,7 +30,12 @@ public class IconController {
         IconDTO iconGuardado = iconService.save(icon);
         return ResponseEntity.status(HttpStatus.CREATED).body(iconGuardado);
 
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id){
+        this.iconService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
 }

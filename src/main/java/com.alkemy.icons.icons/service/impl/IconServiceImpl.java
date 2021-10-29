@@ -32,4 +32,8 @@ public class IconServiceImpl implements IconService {
         return result;
     }
 
+    public void delete(Long id) {
+        this.iconRepository.deleteById(id);
+    }
+
 }

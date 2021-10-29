@@ -32,4 +32,8 @@ public class PaisServiceImpl implements PaisService {
         return result;
     }
 
+    public void delete(Long id) {
+        this.paisRepository.deleteById(id);
+    }
+
 }

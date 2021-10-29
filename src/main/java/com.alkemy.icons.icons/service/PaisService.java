@@ -9,4 +9,6 @@ public interface PaisService {
     PaisDTO save(PaisDTO dto);
 
     List<PaisDTO> getAllPaises();
+
+    void delete(Long id);
 }
