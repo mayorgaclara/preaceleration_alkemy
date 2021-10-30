@@ -18,11 +18,18 @@ public class IconController {
     private IconService iconService;
 
     @GetMapping
-    public ResponseEntity<List<IconDTO>> getAll() {
+    public ResponseEntity<List<IconDTO>> getAll(
+            @RequestParam(value= "name", required = false) String iconName,
+            @RequestParam(value= "date", required = false) String iconDate) {
+
+        if (iconName != null) {
+            return ResponseEntity.ok().body(iconService.getIconsByName(iconName));
+        }
+        if (iconDate != null) {
+            return ResponseEntity.ok().body(iconService.getIconsByName(iconDate));
+        }
         List<IconDTO> icons = iconService.getAllIcons();
         return ResponseEntity.ok().body(icons);
-
-
     }
 
     @PostMapping

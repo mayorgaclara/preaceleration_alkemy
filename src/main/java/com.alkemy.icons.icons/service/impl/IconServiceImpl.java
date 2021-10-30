@@ -8,6 +8,8 @@ import com.alkemy.icons.icons.service.IconService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +32,28 @@ public class IconServiceImpl implements IconService {
         List<IconEntity> entities = iconRepository.findAll();
         List<IconDTO> result = iconMapper.iconEntityList2DTOList(entities);
         return result;
+    }
+
+    public List<IconDTO> getIconsByName(String name) {
+        List<IconEntity> entities = iconRepository.findAll();
+        List<IconEntity> entitiesByName = new ArrayList<>();
+        for(IconEntity icon: entities ) {
+            if (icon.getDenominacion().equals(name)){
+                entitiesByName.add(icon);
+            }
+        }
+        return iconMapper.iconEntityList2DTOList(entitiesByName);
+    }
+
+    public List<IconDTO> getIconsByDate(LocalDate date) {
+        List<IconEntity> entities = iconRepository.findAll();
+        List<IconEntity> entitiesByDate = new ArrayList<>();
+        for(IconEntity icon: entities ) {
+            if (icon.getFechaCreacion().equals(date)){
+                entitiesByDate.add(icon);
+            }
+        }
+        return iconMapper.iconEntityList2DTOList(entitiesByDate);
     }
 
     public void delete(Long id) {
