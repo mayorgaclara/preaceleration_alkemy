@@ -14,6 +14,9 @@ public class IconMapper {
         IconEntity iconEntity = new IconEntity();
         iconEntity.setImagen(dto.getImagen());
         iconEntity.setDenominacion(dto.getDenominacion());
+        iconEntity.setAltura(dto.getAltura());
+        iconEntity.setHistoria(dto.getHistoria());
+        iconEntity.setFechaCreacion(dto.getFechaCreacion());
         return iconEntity;
     }
 

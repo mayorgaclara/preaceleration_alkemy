@@ -3,6 +3,7 @@ package com.alkemy.icons.icons.controller;
 import com.alkemy.icons.icons.dto.IconDTO;
 import com.alkemy.icons.icons.service.IconService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class IconController {
     @GetMapping
     public ResponseEntity<List<IconDTO>> getAll(
             @RequestParam(value= "name", required = false) String iconName,
-            @RequestParam(value= "date", required = false) LocalDate iconDate) {
+            @RequestParam(value= "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate iconDate) {
 
         if (iconName != null) {
             return ResponseEntity.ok().body(iconService.getIconsByName(iconName));
