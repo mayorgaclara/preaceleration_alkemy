@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,16 +18,21 @@ public class IconController {
     @Autowired
     private IconService iconService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<IconDTO> getById(@PathVariable Long id){
+        return ResponseEntity.ok().body(iconService.getById(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<IconDTO>> getAll(
             @RequestParam(value= "name", required = false) String iconName,
-            @RequestParam(value= "date", required = false) String iconDate) {
+            @RequestParam(value= "date", required = false) LocalDate iconDate) {
 
         if (iconName != null) {
             return ResponseEntity.ok().body(iconService.getIconsByName(iconName));
         }
         if (iconDate != null) {
-            return ResponseEntity.ok().body(iconService.getIconsByName(iconDate));
+            return ResponseEntity.ok().body(iconService.getIconsByDate(iconDate));
         }
         List<IconDTO> icons = iconService.getAllIcons();
         return ResponseEntity.ok().body(icons);

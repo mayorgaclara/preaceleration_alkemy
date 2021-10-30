@@ -2,8 +2,8 @@ package com.alkemy.icons.icons.service.impl;
 
 import com.alkemy.icons.icons.dto.IconDTO;
 import com.alkemy.icons.icons.entity.IconEntity;
-import com.alkemy.icons.icons.repository.IconRepository;
 import com.alkemy.icons.icons.mapper.IconMapper;
+import com.alkemy.icons.icons.repository.IconRepository;
 import com.alkemy.icons.icons.service.IconService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,11 @@ public class IconServiceImpl implements IconService {
         return result;
     }
 
+    public IconDTO getById(Long id){
+        return iconMapper.iconEntity2DTO(iconRepository.getById(id));
+
+    }
+
     public List<IconDTO> getIconsByName(String name) {
         List<IconEntity> entities = iconRepository.findAll();
         List<IconEntity> entitiesByName = new ArrayList<>();
@@ -44,6 +49,7 @@ public class IconServiceImpl implements IconService {
         }
         return iconMapper.iconEntityList2DTOList(entitiesByName);
     }
+
 
     public List<IconDTO> getIconsByDate(LocalDate date) {
         List<IconEntity> entities = iconRepository.findAll();

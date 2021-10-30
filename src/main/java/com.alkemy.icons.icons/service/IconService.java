@@ -11,6 +11,8 @@ public interface IconService {
 
     List<IconDTO> getAllIcons();
 
+    IconDTO getById(Long id);
+
     List<IconDTO> getIconsByName(String name);
 
     List<IconDTO> getIconsByDate(LocalDate date);
