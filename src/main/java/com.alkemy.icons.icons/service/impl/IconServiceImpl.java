@@ -62,6 +62,17 @@ public class IconServiceImpl implements IconService {
         return iconMapper.iconEntityList2DTOList(entitiesByDate);
     }
 
+    public List<IconDTO> getIconsByCountry(Long countryId) {
+        List<IconEntity> entities = iconRepository.findAll();
+        List<IconEntity> entitiesByCountry = new ArrayList<>();
+        for(IconEntity icon: entities ) {
+            if (icon.getPaises().equals(countryId)){
+                entitiesByCountry.add(icon);
+            }
+        }
+        return iconMapper.iconEntityList2DTOList(entitiesByCountry);
+    }
+
     public void delete(Long id) {
         this.iconRepository.deleteById(id);
     }

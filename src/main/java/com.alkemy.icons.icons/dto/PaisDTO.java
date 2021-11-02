@@ -1,9 +1,10 @@
 package com.alkemy.icons.icons.dto;
 
+import com.alkemy.icons.icons.entity.IconEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,4 +14,6 @@ public class PaisDTO {
     private String denominacion;
     private Long habitantes;
     private Long superficie;
+    private Set<IconEntity> icons;
+    private Long continenteId;
 }

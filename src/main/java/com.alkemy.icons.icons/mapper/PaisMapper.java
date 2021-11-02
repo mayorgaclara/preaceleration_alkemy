@@ -14,6 +14,10 @@ public class PaisMapper {
         PaisEntity paisEntity = new PaisEntity();
         paisEntity.setImagen(dto.getImagen());
         paisEntity.setDenominacion(dto.getDenominacion());
+        paisEntity.setSuperficie(dto.getSuperficie());
+        paisEntity.setContinenteId(dto.getContinenteId());
+        paisEntity.setCantidadHabitantes(dto.getHabitantes());
+        paisEntity.setIcons(dto.getIcons());
         return paisEntity;
     }
 
@@ -24,6 +28,8 @@ public class PaisMapper {
         dto.setDenominacion(entity.getDenominacion());
         dto.setHabitantes(entity.getCantidadHabitantes());
         dto.setSuperficie(entity.getSuperficie());
+        dto.setContinenteId(entity.getContinenteId());
+        dto.setIcons(entity.getIcons());
         return dto;
     }
 

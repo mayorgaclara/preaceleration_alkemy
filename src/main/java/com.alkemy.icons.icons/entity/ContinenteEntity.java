@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 
 @Entity

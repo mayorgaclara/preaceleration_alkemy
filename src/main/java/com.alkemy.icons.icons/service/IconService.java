@@ -17,5 +17,7 @@ public interface IconService {
 
     List<IconDTO> getIconsByDate(LocalDate date);
 
+    List<IconDTO> getIconsByCountry(Long countryId);
+
     void delete(Long id);
 }

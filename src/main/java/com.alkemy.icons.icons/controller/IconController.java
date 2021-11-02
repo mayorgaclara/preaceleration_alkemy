@@ -27,13 +27,17 @@ public class IconController {
     @GetMapping
     public ResponseEntity<List<IconDTO>> getAll(
             @RequestParam(value= "name", required = false) String iconName,
-            @RequestParam(value= "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate iconDate) {
+            @RequestParam(value= "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate iconDate,
+            @RequestParam(value= "country", required = false) Long iconCountry) {
 
         if (iconName != null) {
             return ResponseEntity.ok().body(iconService.getIconsByName(iconName));
         }
         if (iconDate != null) {
             return ResponseEntity.ok().body(iconService.getIconsByDate(iconDate));
+        }
+        if (iconCountry != null) {
+            return ResponseEntity.ok().body(iconService.getIconsByCountry(iconCountry));
         }
         List<IconDTO> icons = iconService.getAllIcons();
         return ResponseEntity.ok().body(icons);

@@ -17,6 +17,7 @@ public class IconMapper {
         iconEntity.setAltura(dto.getAltura());
         iconEntity.setHistoria(dto.getHistoria());
         iconEntity.setFechaCreacion(dto.getFechaCreacion());
+        iconEntity.setPaises(dto.getPaises());
         return iconEntity;
     }
 
@@ -28,6 +29,7 @@ public class IconMapper {
         dto.setAltura(entity.getAltura());
         dto.setHistoria(entity.getHistoria());
         dto.setFechaCreacion(entity.getFechaCreacion());
+        dto.setPaises(entity.getPaises());
         return dto;
     }
 
