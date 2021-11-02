@@ -6,8 +6,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pais")
@@ -48,7 +48,7 @@ public class PaisEntity {
             name = "icon_pais",
             joinColumns = @JoinColumn(name = "pais_id"),
             inverseJoinColumns = @JoinColumn(name = "icon_id"))
-    private Set<IconEntity> icons = new HashSet<>();
+    private List<IconEntity> icons = new ArrayList<>();
 
 }
 

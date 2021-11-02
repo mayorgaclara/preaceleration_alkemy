@@ -1,14 +1,21 @@
 package com.alkemy.icons.icons.mapper;
 
 import com.alkemy.icons.icons.dto.IconDTO;
+import com.alkemy.icons.icons.dto.PaisDTO;
 import com.alkemy.icons.icons.entity.IconEntity;
+import com.alkemy.icons.icons.entity.PaisEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class IconMapper {
+
+    @Autowired
+    private PaisMapper paisMapper;
 
     public IconEntity iconDTO2Entity(IconDTO dto) {
         IconEntity iconEntity = new IconEntity();
@@ -17,11 +24,12 @@ public class IconMapper {
         iconEntity.setAltura(dto.getAltura());
         iconEntity.setHistoria(dto.getHistoria());
         iconEntity.setFechaCreacion(dto.getFechaCreacion());
-        iconEntity.setPaises(dto.getPaises());
+        Set<PaisEntity> paises = this.paisMapper.paisDTOList2EntityList(dto.getPaises());
+        iconEntity.setPaises((List<PaisEntity>) paises);
         return iconEntity;
     }
 
-    public IconDTO iconEntity2DTO(IconEntity entity) {
+    public IconDTO iconEntity2DTO(IconEntity entity, boolean loadPaises) {
         IconDTO dto = new IconDTO();
         dto.setId(entity.getId());
         dto.setImagen(entity.getImagen());
@@ -29,15 +37,26 @@ public class IconMapper {
         dto.setAltura(entity.getAltura());
         dto.setHistoria(entity.getHistoria());
         dto.setFechaCreacion(entity.getFechaCreacion());
-        dto.setPaises(entity.getPaises());
+        if (loadPaises) {
+            List<PaisDTO> paisesDTO = this.paisMapper.paisEntityList2DTOList(entity.getPaises(), false);
+            dto.setPaises(paisesDTO);
+        }
         return dto;
     }
 
-    public List<IconDTO> iconEntityList2DTOList(List<IconEntity> entities) {
+    public List<IconDTO> iconEntityList2DTOList(List<IconEntity> entities, boolean loadPaises) {
         List<IconDTO> dtos = new ArrayList<>();
         for (IconEntity entity : entities) {
-            dtos.add(this.iconEntity2DTO(entity));
+            dtos.add(this.iconEntity2DTO(entity, loadPaises));
         }
         return dtos;
+    }
+
+    public Set<IconEntity> iconDTOList2EntityList(List<IconDTO> icons) {
+        List<IconEntity> entities = new ArrayList<>();
+        for (IconDTO dto : icons) {
+            entities.add(iconDTO2Entity(dto));
+        }
+        return (Set<IconEntity>) entities;
     }
 }

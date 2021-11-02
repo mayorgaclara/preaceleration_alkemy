@@ -24,18 +24,18 @@ public class IconServiceImpl implements IconService {
     public IconDTO save(IconDTO dto) {
         IconEntity entity = iconMapper.iconDTO2Entity(dto);
         IconEntity entitySaved = iconRepository.save(entity);
-        IconDTO result = iconMapper.iconEntity2DTO(entitySaved);
+        IconDTO result = iconMapper.iconEntity2DTO(entitySaved, true);
         return result;
     }
 
     public List<IconDTO> getAllIcons() {
         List<IconEntity> entities = iconRepository.findAll();
-        List<IconDTO> result = iconMapper.iconEntityList2DTOList(entities);
+        List<IconDTO> result = iconMapper.iconEntityList2DTOList(entities, true);
         return result;
     }
 
     public IconDTO getById(Long id){
-        return iconMapper.iconEntity2DTO(iconRepository.getById(id));
+        return iconMapper.iconEntity2DTO(iconRepository.getById(id), true);
 
     }
 
@@ -47,7 +47,7 @@ public class IconServiceImpl implements IconService {
                 entitiesByName.add(icon);
             }
         }
-        return iconMapper.iconEntityList2DTOList(entitiesByName);
+        return iconMapper.iconEntityList2DTOList(entitiesByName, true);
     }
 
 
@@ -59,18 +59,19 @@ public class IconServiceImpl implements IconService {
                 entitiesByDate.add(icon);
             }
         }
-        return iconMapper.iconEntityList2DTOList(entitiesByDate);
+        return iconMapper.iconEntityList2DTOList(entitiesByDate, true);
     }
 
     public List<IconDTO> getIconsByCountry(Long countryId) {
         List<IconEntity> entities = iconRepository.findAll();
         List<IconEntity> entitiesByCountry = new ArrayList<>();
+        System.out.println("country");
         for(IconEntity icon: entities ) {
             if (icon.getPaises().equals(countryId)){
                 entitiesByCountry.add(icon);
             }
         }
-        return iconMapper.iconEntityList2DTOList(entitiesByCountry);
+        return iconMapper.iconEntityList2DTOList(entitiesByCountry, true);
     }
 
     public void delete(Long id) {

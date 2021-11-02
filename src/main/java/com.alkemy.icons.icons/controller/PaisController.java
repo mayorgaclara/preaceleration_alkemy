@@ -19,7 +19,7 @@ public class PaisController {
 
     @GetMapping
     public ResponseEntity<List<PaisDTO>> getAll() {
-        List<PaisDTO> paises = paisService.getAllPaises();
+        List<PaisDTO> paises = this.paisService.getAllPaises();
         return ResponseEntity.ok().body(paises);
     }
 
