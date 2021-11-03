@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class PaisMapper {
@@ -18,15 +17,17 @@ public class PaisMapper {
     private IconMapper iconMapper;
 
 
-    public PaisEntity paisDTO2Entity(PaisDTO dto) {
+    public PaisEntity paisDTO2Entity(PaisDTO dto, boolean loadIcons) {
         PaisEntity paisEntity = new PaisEntity();
         paisEntity.setImagen(dto.getImagen());
         paisEntity.setDenominacion(dto.getDenominacion());
         paisEntity.setSuperficie(dto.getSuperficie());
         paisEntity.setContinenteId(dto.getContinenteId());
         paisEntity.setCantidadHabitantes(dto.getHabitantes());
-        Set <IconEntity> icons = this.iconMapper.iconDTOList2EntityList(dto.getIcons());
-        paisEntity.setIcons((List<IconEntity>) icons);
+        if (loadIcons) {
+            List<IconEntity> icons = this.iconMapper.iconDTOList2EntityList(dto.getIcons());
+            paisEntity.setIcons(icons);
+        }
         return paisEntity;
     }
 
@@ -55,12 +56,12 @@ public class PaisMapper {
     }
 
 
-    public Set<PaisEntity> paisDTOList2EntityList(List<PaisDTO> paises) {
+    public List<PaisEntity> paisDTOList2EntityList(List<PaisDTO> paises) {
         List<PaisEntity> entities = new ArrayList<>();
         for (PaisDTO dto : paises) {
-            entities.add(paisDTO2Entity(dto));
+            entities.add(paisDTO2Entity(dto, false));
         }
-        return (Set<PaisEntity>) entities;
+        return entities;
     }
 
 

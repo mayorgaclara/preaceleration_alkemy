@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class IconMapper {
@@ -17,15 +16,17 @@ public class IconMapper {
     @Autowired
     private PaisMapper paisMapper;
 
-    public IconEntity iconDTO2Entity(IconDTO dto) {
+    public IconEntity iconDTO2Entity(IconDTO dto, boolean loadPaises) {
         IconEntity iconEntity = new IconEntity();
         iconEntity.setImagen(dto.getImagen());
         iconEntity.setDenominacion(dto.getDenominacion());
         iconEntity.setAltura(dto.getAltura());
         iconEntity.setHistoria(dto.getHistoria());
         iconEntity.setFechaCreacion(dto.getFechaCreacion());
-        Set<PaisEntity> paises = this.paisMapper.paisDTOList2EntityList(dto.getPaises());
-        iconEntity.setPaises((List<PaisEntity>) paises);
+        if (loadPaises) {
+            List<PaisEntity> paises = this.paisMapper.paisDTOList2EntityList(dto.getPaises());
+            iconEntity.setPaises(paises);
+        }
         return iconEntity;
     }
 
@@ -52,11 +53,11 @@ public class IconMapper {
         return dtos;
     }
 
-    public Set<IconEntity> iconDTOList2EntityList(List<IconDTO> icons) {
+    public List<IconEntity> iconDTOList2EntityList(List<IconDTO> icons) {
         List<IconEntity> entities = new ArrayList<>();
         for (IconDTO dto : icons) {
-            entities.add(iconDTO2Entity(dto));
+            entities.add(iconDTO2Entity(dto, false));
         }
-        return (Set<IconEntity>) entities;
+        return entities;
     }
 }

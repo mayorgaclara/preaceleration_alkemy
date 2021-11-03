@@ -37,7 +37,6 @@ public class IconController {
             return ResponseEntity.ok().body(iconService.getIconsByDate(iconDate));
         }
         if (iconCountry != null) {
-            System.out.println("country");
             return ResponseEntity.ok().body(iconService.getIconsByCountry(iconCountry));
         }
         List<IconDTO> icons = iconService.getAllIcons();

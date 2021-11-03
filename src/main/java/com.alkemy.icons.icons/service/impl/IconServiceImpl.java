@@ -22,9 +22,9 @@ public class IconServiceImpl implements IconService {
 
 
     public IconDTO save(IconDTO dto) {
-        IconEntity entity = iconMapper.iconDTO2Entity(dto);
+        IconEntity entity = iconMapper.iconDTO2Entity(dto, true);
         IconEntity entitySaved = iconRepository.save(entity);
-        IconDTO result = iconMapper.iconEntity2DTO(entitySaved, true);
+        IconDTO result = iconMapper.iconEntity2DTO(entitySaved, false);
         return result;
     }
 
@@ -65,7 +65,6 @@ public class IconServiceImpl implements IconService {
     public List<IconDTO> getIconsByCountry(Long countryId) {
         List<IconEntity> entities = iconRepository.findAll();
         List<IconEntity> entitiesByCountry = new ArrayList<>();
-        System.out.println("country");
         for(IconEntity icon: entities ) {
             if (icon.getPaises().equals(countryId)){
                 entitiesByCountry.add(icon);
