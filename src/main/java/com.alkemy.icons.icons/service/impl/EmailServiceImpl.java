@@ -38,7 +38,7 @@ public class EmailServiceImpl implements EmailService {
                 "text/plan",
                 "Bienvenidx a Alkemy Icons"
         );
-        String subject = "Alkemy Icons";
+        String subject = "Alkemy Icons - Bienvenidx!";
 
         Mail mail = new Mail(fromEmail, subject, toEmail, content);
         SendGrid sg = new SendGrid(apiKey);
