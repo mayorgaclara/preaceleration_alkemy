@@ -3,6 +3,7 @@ package com.alkemy.icons.icons.auth.service;
 import com.alkemy.icons.icons.auth.dto.UserDTO;
 import com.alkemy.icons.icons.auth.entity.UserEntity;
 import com.alkemy.icons.icons.auth.repository.UserRepository;
+import com.alkemy.icons.icons.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,8 @@ public class UserDetailsCostumService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailService emailService;
 
 
     @Override
@@ -33,6 +36,9 @@ public class UserDetailsCostumService implements UserDetailsService {
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setPassword(userDTO.getPassword());
         userEntity = this.userRepository.save(userEntity);
+        if(userEntity != null) {
+            emailService.sendWelcomeEmailTo(userEntity.getUsername());
+        }
         return userEntity != null;
     }
 }
